@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-  get 'alice' => 'twilio#alice'
-  get 'bob' => 'twilio#bob'
+  root 'twilio#client'
 
-  post 'voice_alice' => 'twilio#voice_alice'
+  post 'voice' => 'twilio#voice'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
