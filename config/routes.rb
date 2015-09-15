@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  post 'twilio/voice' => 'twilio#voice'
+  get 'alice' => 'twilio#alice'
+  get 'bob' => 'twilio#bob'
+
+  post 'voice_alice' => 'twilio#voice_alice'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
