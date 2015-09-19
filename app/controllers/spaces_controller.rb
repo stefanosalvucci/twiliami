@@ -32,7 +32,7 @@ class SpacesController < ApplicationController
     @space = Space.new(space_params)
     respond_to do |format|
       if @space.save
-        @space.update_column(:twilio_number, create_number_from_twilio(@space))
+        @space.update_column(:twilio_number, update_twilio_number_voice_url(@space))
 
         format.html { redirect_to @space, notice: 'Space was successfully created.' }
         format.json { render :show, status: :created, location: @space }

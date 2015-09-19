@@ -15,12 +15,13 @@ class ApplicationController < ActionController::Base
     #@numbers = @client.account.available_phone_numbers.get('IT').local.list()
 
     begin
-      @number = AvailableTwilioNumber.where(status: 'released').first.number
+      available_number = AvailableTwilioNumber.where(status: 'released').first
+      sid = available_number.sid
     rescue Exception
       raise 'The only number we have is already assigned'
     end
-    @twilio_number = @client.account.incoming_phone_numbers.get(@number)
-    @client.account.incoming_phone_numbers.update(
+    @twilio_number = @client.account.incoming_phone_numbers.get(sid)
+    @twilio_number.update(
       :VoiceUrl => url_for(
         controller: object.class.to_s.tableize,
         action: :forward,
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::Base
       )
     )
     AvailableTwilioNumber.where(status: 'released').first.update_column(:status, 'busy')
-    @number
+    available_number.number
   end
 
 end
