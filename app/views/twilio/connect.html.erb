@@ -14,7 +14,7 @@
     Twilio.Device.setup("<%= @token %>", {debug: true});
 
       Twilio.Device.ready(function (device) {
-        $("#log").text("Client '<%= @client_name %>' is ready");
+        $("#log").text("<%= action_name %> '<%= @username %>' is ready");
       });
 
       Twilio.Device.error(function (error) {
@@ -56,7 +56,7 @@
     </button>
 
     <input type="text" id="number" name="number"
-      placeholder="Enter a phone number or client to call"/>
+      placeholder="Enter a phone number or client to call" value="<%= params[:target] %>" />
 
     <div id="log">Loading pigeons...</div>
   </body>

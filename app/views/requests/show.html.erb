@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Twilio Username:</strong>
+  <%= @request.request_username %>
+</p>
+
+
+<p>
+  <strong>Twilio phone:</strong>
+  <%= @request.request_phone %>
+</p>
+
+<p>
+  <%= link_to 'Call owner', client_path(username: @request.request_username, target: @request.space.username), target: '_blank' %>
+</p>
+
+<%= link_to 'Back', :back %>

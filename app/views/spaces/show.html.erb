@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= link_to 'Listen for calls as a owner', owner_path(username: @space.username), target: '_blank' %>
+  <% if @space.requests.any? %>
+    or call directly any request's creator:
+    <% @space.requests.each do |r| %>
+      <%= link_to "#{r.request_username}(#{r.request_phone})", owner_path(username: @space.username, target: r.request_username), target: '_blank' %>
+    <% end %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @space.phone %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @space.username %>
+</p>
+
+<% if @space.requests.any? %>
+  <strong>Requests:</strong>
+  <% @space.requests.each do |r| %>
+    <p><%= link_to r.request_phone, r %> - <%= link_to 'Destroy', r, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+<% end %>
+
+<p>
+  <strong>Create Request: (only for users, the owner cannot do this) </strong>
+  <%= render 'requests/form' %>
+</p>
+
+<%= link_to 'Edit', edit_space_path(@space) %> |
+<%= link_to 'Back', spaces_path %>
