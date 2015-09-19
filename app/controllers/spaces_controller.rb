@@ -1,7 +1,9 @@
 class SpacesController < ApplicationController
   include Webhookable
 
-  before_action :set_space, only: [:show, :edit, :update, :destroy]
+  before_action :set_space, only: [:show, :edit, :update, :destroy, :forward]
+  after_filter :set_header, only: [:forward]
+  skip_before_action :verify_authenticity_token, only: [:forward]
 
   # GET /spaces
   # GET /spaces.json
