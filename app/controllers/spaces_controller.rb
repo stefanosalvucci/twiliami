@@ -60,7 +60,9 @@ class SpacesController < ApplicationController
   # DELETE /spaces/1
   # DELETE /spaces/1.json
   def destroy
+    AvailableTwilioNumber.first.update_column(:status, 'released')
     @space.destroy
+
     respond_to do |format|
       format.html { redirect_to spaces_url, notice: 'Space was successfully destroyed.' }
       format.json { head :no_content }

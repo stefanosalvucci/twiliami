@@ -54,6 +54,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
+    AvailableTwilioNumber.first.update_column(:status, 'released')
     @request.destroy
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Request was successfully destroyed.' }
