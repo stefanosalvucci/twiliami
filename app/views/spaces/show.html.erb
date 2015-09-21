@@ -17,6 +17,13 @@
   <%= @space.phone %>
 </p>
 
+<% if @space.available_twilio_number.present? %>
+  <p>
+    <strong>Twilio Phone: </strong>
+    <%= @space.available_twilio_number.number %>
+  </p>
+<% end %>
+
 <p>
   <strong>Username:</strong>
   <%= @space.username %>

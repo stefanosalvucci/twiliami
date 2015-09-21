@@ -61,6 +61,8 @@ class SpacesController < ApplicationController
   # DELETE /spaces/1.json
   def destroy
     AvailableTwilioNumber.first.update_column(:status, 'released')
+    AvailableTwilioNumber.first.update_column(:space_id, nil)
+
     @space.destroy
 
     respond_to do |format|
