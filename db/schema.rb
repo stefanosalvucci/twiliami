@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20150919160826) do
     t.string   "number"
     t.string   "sid"
     t.string   "status"
+    t.integer  "space_id"
+    t.integer  "request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

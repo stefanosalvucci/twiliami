@@ -12,8 +12,6 @@ class ApplicationController < ActionController::Base
 
     @client = Twilio::REST::Client.new account_sid, auth_token
 
-    #@numbers = @client.account.available_phone_numbers.get('IT').local.list()
-
     begin
       available_number = AvailableTwilioNumber.where(status: 'released').first
       sid = available_number.sid
@@ -30,6 +28,15 @@ class ApplicationController < ActionController::Base
       )
     )
     AvailableTwilioNumber.where(status: 'released').first.update_column(:status, 'busy')
+    case object
+    when Request
+      available_number.request = object
+      available_number.save
+    when Space
+      available_number.space = object
+      available_number.save
+    end
+
     available_number.number
   end
 

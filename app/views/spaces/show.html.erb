@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Space <%= @space.id %></h1>
+
 <p>
   <%= link_to 'Listen for calls as a owner', owner_path(username: @space.username), target: '_blank' %>
   <% if @space.requests.any? %>
@@ -11,7 +13,7 @@
 </p>
 
 <p>
-  <strong>Phone:</strong>
+  <strong>Phone:  (real phone, so hidden for the users)</strong>
   <%= @space.phone %>
 </p>
 
@@ -21,16 +23,19 @@
 </p>
 
 <% if @space.requests.any? %>
-  <strong>Requests:</strong>
+  <strong>Requests from users:</strong>
   <% @space.requests.each do |r| %>
-    <p><%= link_to r.request_phone, r %> - <%= link_to 'Destroy', r, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <p><%= link_to "#{r.request_phone} (hidden for the owner)", r %> - <%= link_to 'Destroy', r, method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
 <% end %>
+<%= link_to 'Edit', edit_space_path(@space) %> |
+<%= link_to 'Back', spaces_path %>
 
+
+<br><br><br><hr><br>
 <p>
   <strong>Create Request: (only for users, the owner cannot do this) </strong>
   <%= render 'requests/form' %>
 </p>
 
-<%= link_to 'Edit', edit_space_path(@space) %> |
-<%= link_to 'Back', spaces_path %>
+

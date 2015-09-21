@@ -5,6 +5,9 @@ class CreateAvailableTwilioNumbers < ActiveRecord::Migration
       t.string :sid
       t.string :status
 
+      t.references :space
+      t.references :request
+
       t.timestamps null: false
     end
   end
